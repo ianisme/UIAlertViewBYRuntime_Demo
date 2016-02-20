@@ -53,24 +53,19 @@
 
 - (IBAction)ThirdButtonClick:(id)sender {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"title" message:@"message" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
-    alertView.callBack = ^(UIAlertView *alertView, NSUInteger buttonIndex){
-        if (buttonIndex == 1) {
-            NSLog(@"魔法alertView1003执行ok");
-        }
-    };
     alertView.tag = 1003;
     [alertView show];
 }
 
 - (IBAction)fourthButtonClick:(id)sender {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"title" message:@"message" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
-//    alertView.callBack = ^(UIAlertView *alertView, NSUInteger buttonIndex){
-//        if (buttonIndex == 1) {
-//            NSLog(@"alertView1004执行ok");
-//        }
-//    };
-    alertView.tag = 1004;
-    [alertView show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"title" message:@"message" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *alertAction){
+        NSLog(@"如果你是iOS8以上的应用，这个适合你，简单明了");
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - delegate method
